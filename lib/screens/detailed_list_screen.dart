@@ -18,20 +18,53 @@ class DetailedListScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(name),
       ),
-      body: Column(
-        children: [
-          FadeInImage(
-            //image: NetworkImage('https://images8.alphacoders.com/110/1103710.jpg'), 
-            image: NetworkImage( imageUrl ), 
-            placeholder: const AssetImage('assets/jar-loading.gif'),
-            width: double.infinity,
-            height: 260,
-            fit: BoxFit.cover,
-            fadeInDuration: const Duration(milliseconds: 3000),
-          ),
-
-          Text(description),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: imageUrl.isNotEmpty
+                  ? Image.network(imageUrl, height: 200, fit: BoxFit.cover)
+                  : Container(
+                      height: 200,
+                      color: Colors.grey.shade300,
+                      child: const Icon(
+                        Icons.image,
+                        size: 50,
+                        color: Colors.grey,
+                      ),
+                    ),
+            ),
+            const SizedBox(height: 16),
+            
+            Text(
+              name,
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 16),
+            
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: Text(
+                description,
+                textAlign: TextAlign.justify,
+                style: const TextStyle(fontSize: 16),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
